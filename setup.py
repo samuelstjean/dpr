@@ -1,12 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-    name='Diffusion profile realignment',
+    name='dpr',
     version='0.1',
     author='Samuel St-Jean',
     author_email='samuel@isi.uu.nl',
-    packages=['dpr',
-              'dpr.tests'],
+    packages=find_packages(),
     # scripts=['bin/stowe-towels.py','bin/wash-towels.py'],
     url='https://github.com/samuelstjean/dpr',
     license='LICENSE',
