@@ -8,9 +8,9 @@ from warnings import warn
 from scipy import ndimage
 
 
-def align_bundles(bundles, percent=15, padding=0., order=1, eps=1e-5, return_shift=True, mode='full_template',
+def align_bundles(bundles, percent=15, padding=0., order=1, eps=1e-5, mode='full_template',
                   remove_outliers=True, remove_baseline=True, whiten=True, normalize=False,
-                  return_outliers=False, return_shifts_matrix=False, rematch_outliers=True):
+                  return_shifts_matrix=False, rematch_outliers=True):
 
     bundles = np.array(bundles, copy=True)
 
@@ -200,11 +200,7 @@ def flip_fibers(bundles, coordinates, padding=np.nan, template=None):
     return new_bundles
 
 
-def truncate(bundles, mode='shortest', percent=None, trimval=np.nan, axis=0):
-
-    if percent is not None:
-        print('percent not used anymore, change mode directly instead')
-        mode = percent
+def truncate(bundles, mode='shortest', trimval=np.nan, axis=0):
 
     if bundles.ndim > 2:
         error = 'Number of dimension must be lower than 2, but was {}'.format(bundles.ndim)
