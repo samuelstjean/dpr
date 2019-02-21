@@ -137,6 +137,7 @@ def main():
                 ax.legend(loc='lower left', fontsize=12)
                 ax.set(ylabel='Metric', xlabel='Coordinates')
 
+            f.tight_layout()
             f.savefig(args.output.replace('.txt','.png'), dpi=200, bbox_inches='tight')
 
     # should patch back whatever was removed beforehand here
