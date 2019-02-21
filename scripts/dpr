@@ -27,8 +27,8 @@ Main script for the diffusion profile realignment (DPR) algorithm.
 EPILOG = """
 Reference :
 
-St-Jean, Samuel, Chamberland, Maxime, Viergever, Max A. and Leemans, Alexander 2019.
-Reducing variability in along-tract analysis with diffusion profile realignment.
+St-Jean, Samuel, Chamberland, Maxime, Viergever, Max A. and Leemans, Alexander.
+Reducing variability in along-tract analysis with diffusion profile realignment (2019)
 Available at: http://arxiv.org/abs/1902.01399.
 """
 

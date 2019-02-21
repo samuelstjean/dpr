@@ -18,13 +18,14 @@ The **-f** option overwrites the output files and the **-v** option prints usefu
 dpr datasets/af_left_AFD.txt datasets/af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75
 ~~~
 
-The output is a text file where each line is a subject and each column is a different point of the along tract analysis.
-We also get a png file with the realignment process.
+The output ```datasets/af_left_AFD_realigned.txt``` is a text file where each line is a subject and each column is a different point of the along tract analysis.
+
+We also get a png file ```datasets/af_left_AFD_realigned.png``` with the before/after realignment process.
 
 ![](datasets/af_left_AFD_realigned.png)
 
 Note how the zero padding present in the original data is decreasing the metrics as less and less subjects are present.
-The realigned metric is instead using padding with Nans, remember to remove it from subsequent analysis if needed.
+The realigned metric is instead using padding with Nans, remember to consider/keep track of it in subsequent analysis as needed.
 
 ### Datasets and reference
 
@@ -32,7 +33,7 @@ The data is also available at https://zenodo.org/record/2483169.
 
 The manuscript is also available at https://www.biorxiv.org/content/10.1101/541920v1.
 
-Here is a bibtex entry
+And here is a bibtex entry for the bioarxiv version.
 
 ~~~latex
 @article {St-Jean2019,
