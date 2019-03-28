@@ -31,19 +31,4 @@ The realigned metric is instead using padding with Nans, remember to consider/ke
 
 The data is also available at https://zenodo.org/record/2483169.
 
-The manuscript is also available at https://www.biorxiv.org/content/10.1101/541920v1.
-
-And here is a bibtex entry for the bioarxiv version.
-
-~~~latex
-@article {St-Jean2019,
-    author = {St-Jean, Samuel and Chamberland, Maxime and Viergever, Max A. and Leemans, Alexander},
-    title = {Reducing variability in along-tract analysis with diffusion profile realignment},
-    elocation-id = {541920},
-    year = {2019},
-    doi = {10.1101/541920},
-    publisher = {Cold Spring Harbor Laboratory},
-    URL = {https://www.biorxiv.org/content/early/2019/02/13/541920},
-    eprint = {https://www.biorxiv.org/content/early/2019/02/13/541920.full.pdf},
-    journal = {bioRxiv}}
-~~~
+The manuscript is also available at https://arxiv.org/abs/1902.01399.
