@@ -29,6 +29,13 @@ The realigned metric is instead using padding with Nans, remember to consider/ke
 
 ### Datasets and reference
 
+The main reference is 
+~~~
+Samuel St-Jean, Maxime Chamberland, Max A. Viergever, Alexander Leemans,
+Reducing variability in along-tract analysis with diffusion profile realignment,
+NeuroImage, 2019. ISSN 1053-811
+~~~
+
 The data is also available at https://zenodo.org/record/2483169.
 
-The manuscript is also available at https://arxiv.org/abs/1902.01399.
+The manuscript is also available at https://www.sciencedirect.com/science/article/pii/S1053811919305014.
