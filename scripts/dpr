@@ -3,12 +3,7 @@
 from __future__ import division, print_function
 
 import numpy as np
-
-try:
-    import matplotlib.pyplot as plt
-    has_plt = True
-except ImportError:
-    has_plt = False
+import matplotlib.pyplot as plt
 
 import argparse
 import logging
@@ -16,7 +11,7 @@ import os
 
 from dpr.register import align_bundles, resample_bundles_to_same, flip_fibers, truncate
 
-# These are a few reading functions for text file I mad,e feel free to use them if they fit your data
+# These are a few reading functions for text file I made, feel free to use them if they fit your data
 from dpr.utils import read_per_line, strip_first_col, strip_header
 
 
@@ -28,8 +23,9 @@ EPILOG = """
 Reference :
 
 St-Jean, Samuel, Chamberland, Maxime, Viergever, Max A. and Leemans, Alexander.
-Reducing variability in along-tract analysis with diffusion profile realignment (2019)
-Available at: http://arxiv.org/abs/1902.01399.
+Reducing variability in along-tract analysis with diffusion profile realignment, NeuroImage, 2019, ISSN 1053-8119
+
+Available at: https://doi.org/10.1016/j.neuroimage.2019.06.016
 """
 
 
@@ -122,25 +118,22 @@ def main():
     logger.info('Final number of points per tract is {}'.format(num_points))
 
     if args.do_graph:
-        if not has_plt:
-            logger.error('Graph can not be saved as matplotlib was not found.')
-        else:
-            f, axes = plt.subplots(2, 1, sharex=False, sharey=True)
-            labels = 'Before realignment', 'After realignment'
+        f, axes = plt.subplots(2, 1, sharex=False, sharey=True)
+        labels = 'Before realignment', 'After realignment'
 
-            for bund, ax, label in zip([data, resampled], axes, labels):
-                mean = np.nanmean(bund, axis=0)
-                std = np.nanstd(bund, axis=0)
-                ax.fill_between(range(len(mean)), mean - std, mean + std)
-                ax.plot(mean, color='r', label=label)
+        for bund, ax, label in zip([data, resampled], axes, labels):
+            mean = np.nanmean(bund, axis=0)
+            std = np.nanstd(bund, axis=0)
+            ax.fill_between(range(len(mean)), mean - std, mean + std)
+            ax.plot(mean, color='r', label=label)
 
-                ax.set_xlim(0, len(mean))
-                ax.set_ylim(0, None)
-                ax.legend(loc='lower left', fontsize=12)
-                ax.set(ylabel='Metric', xlabel='Coordinates')
+            ax.set_xlim(0, len(mean))
+            ax.set_ylim(0, None)
+            ax.legend(loc='lower left', fontsize=12)
+            ax.set(ylabel='Metric', xlabel='Coordinates')
 
-            f.tight_layout()
-            f.savefig(args.output.replace('.txt','.png'), dpi=100, bbox_inches='tight')
+        f.tight_layout()
+        f.savefig(args.output.replace('.txt','.png'), dpi=100, bbox_inches='tight')
 
     # should patch back whatever was removed beforehand here
     if args.exploredti:

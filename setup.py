@@ -2,11 +2,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='dpr',
-    version='0.1.1',
+    version='0.1.2',
     author='Samuel St-Jean',
     author_email='samuel@isi.uu.nl',
     packages=find_packages(),
-    scripts=['scripts/dpr'],
+    scripts=['scripts/dpr', 'scripts/dpr_make_fancy_graph'],
     url='https://github.com/samuelstjean/dpr',
     license='LICENSE',
     description='Implementation of "Reducing variability in along-tract analysis with diffusion profile realignment".',

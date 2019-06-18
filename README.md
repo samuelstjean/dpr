@@ -27,9 +27,25 @@ We also get a png file ```datasets/af_left_AFD_realigned.png``` with the before/
 Note how the zero padding present in the original data is decreasing the metrics as less and less subjects are present.
 The realigned metric is instead using padding with Nans, remember to consider/keep track of it in subsequent analysis as needed.
 
+### Visualizing the results
+
+We can also draw the p-values (computed separately) over the bundle using the script ```dpr_make_fancy_graph```.
+This requires the original coordinates, the truncated version between rois and the coordinates to the representative streamline.
+
+~~~bash
+dpr_make_fancy_graph datasets/af_left_pval_unaligned.txt datasets/af_left_coordinates.txt datasets/af_left_truncated_coordinates.txt datasets/af_left_average_coordinates.txt 0,2 pvals_unaligned.png --title 'p-values before realignment' -f
+dpr_make_fancy_graph datasets/af_left_pval_realigned.txt datasets/af_left_coordinates.txt datasets/af_left_truncated_coordinates.txt datasets/af_left_average_coordinates.txt 0,2 pvals_realigned.png -f
+~~~
+
+And this is the results
+
+![](datasets/pvals_unaligned.png)
+![](datasets/pvals_realigned.png)
+
 ### Datasets and reference
 
-The main reference is 
+The main reference is
+
 ~~~
 Samuel St-Jean, Maxime Chamberland, Max A. Viergever, Alexander Leemans,
 Reducing variability in along-tract analysis with diffusion profile realignment,
