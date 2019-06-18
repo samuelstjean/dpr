@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.1.2] - 2019-06-18
+- New command line script ```dpr_make_fancy_graph``` to draw p-values over bundles as in the paper
+    - Example updated with how to fine tune to your specific needs
+    - Also see the new function ```dpr.utils.draw_fancy_graph``` for even more fine grained control
+    - Added the Neurooimage published reference instead of the preprint version
+
 ## [v0.1.1] - 2019-02-21
 
 - New command line version, available as command ```dpr``` after installation.
