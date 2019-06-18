@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='dpr',
-    version='0.1.1',
+    version='0.1.2',
     author='Samuel St-Jean',
     author_email='samuel@isi.uu.nl',
     packages=find_packages(),
