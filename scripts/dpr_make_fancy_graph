@@ -65,7 +65,7 @@ def buildArgsParser():
                    help='Dot per inch (resolution) of the figure (default : 150)')
 
     p.add_argument('-f', '--force', action='store_true', dest='overwrite',
-                   help='If set, overwrittes the output text file if it already exists.')
+                   help='If set, overwrites the output text file if it already exists.')
 
     p.add_argument('-v', '--verbose', action='store_true', dest='verbose',
                    help='If set, print useful information during processing.')
