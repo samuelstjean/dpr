@@ -42,6 +42,33 @@ And this is the results
 ![](datasets/pvals_unaligned.png)
 ![](datasets/pvals_realigned.png)
 
+### Using docker (instead of installing everything)
+
+Well, you will still need to install docker first, see https://runnable.com/docker/getting-started/.
+After that, from the folder containing the ```Dockerfile```, build the container before running it
+
+~~~bash
+docker build -t dpr:v0.1.2 .
+~~~
+
+The two diffusion profile realignment scripts can now be run using
+
+~~~bash
+docker run dpr:v0.1.2 # the default command is to run dpr --help
+docker run dpr:v0.1.2 dpr_make_fancy_graph --help
+~~~
+
+That's it for the basic version, don't hesitate to adapt everything to your needs.
+
+As a more advanced example, to mount your own data folder inside the container (here we re-use the previous example), use
+
+~~~bash
+docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuel/dpr:v0.1.2 dpr /mnt/af_left_AFD.txt /mnt/af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75
+docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuel/dpr:v0.1.2 dpr_make_fancy_graph /mnt/af_left_pval_unaligned.txt /mnt/af_left_coordinates.txt /mnt/af_left_truncated_coordinates.txt /mnt/af_left_average_coordinates.txt 0,2 /mnt/pvals_unaligned.png --title 'p-values before realignment' -f
+~~~
+
+The result will be located in the folder you specified, here we used ```/home/samuel/git/dpr/datasets```.
+
 ### Datasets and reference
 
 The main reference is
