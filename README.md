@@ -82,3 +82,5 @@ NeuroImage, 2019. ISSN 1053-811
 The data is also available at https://zenodo.org/record/2483169.
 
 The manuscript is also available at https://www.sciencedirect.com/science/article/pii/S1053811919305014.
+
+To refer to a specific version of the code, everything is also archived over at https://zenodo.org/record/3248894.
