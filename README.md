@@ -3,6 +3,11 @@
 An example and assorted implementation from the manuscript **Reducing variability in along-tract analysis with diffusion profile realignment**.
 Have a look at the [example](example.ipynb) on how to use the package and run it on a small example dataset.
 
+To install the package, just run 
+~~~
+pip install dpr
+~~~
+
 ### A quick example from the command line
 
 There is also a command line version for easy usage, here in an example for the AFD metric on the left arcuate fasciculus.
