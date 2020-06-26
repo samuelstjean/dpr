@@ -12,27 +12,16 @@ function [fig] = draw_fancy_graph(pval, coords1, coords2, truncated_coords1, tru
         draw_colorbar = params.draw_colorbar
     %% Defaults
     else
-        coord1_label='X'
-        coord2_label='Y'
-        pval_threshold=1.
-        pval_cmap='plt.cm.hot'
-        mean_fiber_cmap='green'
-        bundle_cmap='blue'
-        shadow_cmap='gray'
-        title='p-values after realignment'
-        draw_colorbar=true
+        coord1_label = 'X'
+        coord2_label = 'Y'
+        pval_threshold = 1.
+        pval_cmap = 'plt.cm.hot'
+        mean_fiber_cmap = 'green'
+        bundle_cmap = 'blue'
+        shadow_cmap = 'gray'
+        title = 'p-values after realignment'
+        draw_colorbar = true
     end
-
-    coord1_label='X'
-    coord2_label='Y'
-    pval_threshold=1.
-    pval_cmap='plt.cm.hot'
-    mean_fiber_cmap='green'
-    bundle_cmap='blue'
-    shadow_cmap='gray'
-    title='p-values after realignment'
-    draw_colorbar=true
-
 
     fig, ax = subplots(1, 1, sharex='col', sharey='row', figsize=(8,8))
 
@@ -61,8 +50,9 @@ function [fig] = draw_fancy_graph(pval, coords1, coords2, truncated_coords1, tru
     pval_resampled[pval_resampled > pval_threshold] = np.nan
     cmap_axis = ax.scatter(x, y, c=pval_resampled, cmap=pval_cmap, zorder=10, marker='.', vmin=0, vmax=pval_threshold)
 
-    if draw_colorbar:
+    if draw_colorbar
         colorbar(cmap_axis)
+    end
 
     axis('equal')
     set_xlabel("{} coordinates (mm)".format(coord1_label), fontsize=12)

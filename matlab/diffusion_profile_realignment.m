@@ -1,3 +1,5 @@
+% Main function for diffusion profile realignment and its helper subfunctions
+
 function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
 
     if exist(params, 'var') == 1
@@ -9,12 +11,12 @@ function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
         rematch_outliers = params.rematch_outliers;
     %% Defaults
     else
-        params.percent = 15;
-        params.padding = 0;
-        params.epsilon = 1e-5;
-        params.remove_baseline = true;
-        params.whiten = true;
-        params.rematch_outliers = true;
+        percent = 15;
+        padding = 0;
+        epsilon = 1e-5;
+        remove_baseline = true;
+        whiten = true;
+        rematch_outliers = true;
     end
 
     % if we zero padded, put them to nan for now
@@ -51,7 +53,8 @@ function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
         % abs(shifts) will be a symmetric matrix
         largest_shifts = max(abs(shifts), 2);
         largest_shifts = largest_shifts(original_templater);
-        original_templater = original_templater(find(min(largest_shifts)));
+        argmin = find(min(largest_shifts(:)) == largest_shifts);
+        original_templater = original_templater(argmin);
     end
 
     if rematch_outliers
@@ -63,10 +66,10 @@ function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
 
             % this is the indices of the outliers for the best alignment template bundle we just found
             outliers = abs(shifts(original_templater)) > maxoverlaps;
-            outliers = find(outliers);
+            outliers = (1:npairs)(outliers);
 
             candidates = abs(shifts(original_templater)) <= maxoverlaps;
-            candidates = find(candidates);
+            candidates = (1:npairs)(candidates);
 
             for idx = 1:size(outliers)
                 outlier = outliers(idx);
@@ -115,30 +118,6 @@ function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
     ys = apply_shift(bundles, shifts(original_templater));
     final_shifts = shifts(original_templater);
 end
-
-
-% function [truncated] = truncate(bundles, truncmode='shortest')
-
-%     if ndims(bundles) > 2:
-%         error('Number of dimension must be equal or lower than 2, but was %i', ndims(bundles));
-%     end
-
-%     if isnumeric(truncmode)
-%         if truncmode > 100 || truncmode < 1
-%             error('truncmode must be between 1 and 100, but is %f', truncmode);
-%         end
-%         threshold = floor(truncmode * bundles.shape[0] / 100);
-%     elseif truncmode == 'shortest'
-%         threshold = bundles.shape[0];
-%     elseif truncmode == 'longest';
-%         threshold = 1;
-%     else
-%         error('Unrecognized truncation truncmode %s',truncmode);
-%     end
-
-%     indexes = sum(isfinite(bundles), 1) >= threshold;
-%     truncated = bundles(:, indexes);
-% end
 
 
 % function [output] = filter_pairs(bundles)
@@ -232,23 +211,25 @@ function rfft = rfft(a, pad)
 end
 
 
-function irfft = irfft(x, even=true)
-     n = 0; % the output length
-     s = 0; % the variable that will hold the index of the highest
-            % frequency below N/2, s = floor((n+1)/2)
-     % Even case
-     if (rem(length(x), 2)==0)
+function irfft = irfft(x)
+    % n: the output length
+    % s: the variable that will hold the index of the highest
+    % frequency below N/2, s = floor((n+1)/2)
+
+    % Even case
+    if (rem(length(x), 2)==0)
         n = 2 * (length(x) - 1);
         s = length(x) - 1;
     % Odd case
     else
         n = 2 * (length(x) - 1) + 1;
         s = length(x);
-     end
-     xn = zeros(1,n);
-     xn(1:length(x)) = x;
-     xn(length(x)+1:n) = conj(x(s:-1:2));
-     irfft  = ifft(xn);
+    end
+
+    xn = zeros(1,n);
+    xn(1:length(x)) = x;
+    xn(length(x)+1:n) = conj(x(s:-1:2));
+    irfft = ifft(xn);
 end
 
 
@@ -294,24 +275,3 @@ function [shifted_bundles] = apply_shift(bundles, shifts)
     end
 
 end
-
-
-% function [resampled] = resample_bundles_to_same(bundles, num_points)
-
-%     ndim = size(bundles);
-
-%     if length(ndim) ~= 2:
-%         error('bundles needs to be a 2D array, but is %iD', length(ndim));
-
-%     resampled = zeros(ndim(1), num_points);
-%     strip = zeros(ndim(1));
-
-%     for i = 1:ndim(1)
-%         strip(:) = bundles(i, :);
-%         len = size(strip);
-%         old_coord = linspace(1, len, len) / len;
-%         new_coord = linspace(1, len, num_points) / len;
-%         interpolated = interp1(new_coord, old_coord, strip);
-%         resampled(i, :) = interpolated;
-%     end
-% end
