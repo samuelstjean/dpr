@@ -1,22 +1,21 @@
 % Main function for diffusion profile realignment and its helper subfunctions
 
-function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
+function [realigned, final_shifts] = diffusion_profile_realignment(bundles, params)
 
-    if exist(params, 'var') == 1
-        percent = params.percent;
-        padding = params.padding;
-        epsilon = params.epsilon;
-        remove_baseline = params.remove_baseline;
-        whiten = params.whiten;
-        rematch_outliers = params.rematch_outliers;
-    %% Defaults
-    else
+    if strcmp(params, 'default')
         percent = 15;
         padding = 0;
         epsilon = 1e-5;
         remove_baseline = true;
         whiten = true;
         rematch_outliers = true;
+    else
+        percent = params.percent;
+        padding = params.padding;
+        epsilon = params.epsilon;
+        remove_baseline = params.remove_baseline;
+        whiten = params.whiten;
+        rematch_outliers = params.rematch_outliers;
     end
 
     % if we zero padded, put them to nan for now
@@ -65,11 +64,11 @@ function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
         while condition
 
             % this is the indices of the outliers for the best alignment template bundle we just found
-            outliers = abs(shifts(original_templater)) > maxoverlaps;
-            outliers = (1:npairs)(outliers);
+            outliers = find(abs(shifts(original_templater)) > maxoverlaps);
+            % outliers = (1:npairs)(outliers);
 
-            candidates = abs(shifts(original_templater)) <= maxoverlaps;
-            candidates = (1:npairs)(candidates);
+            candidates = find(abs(shifts(original_templater)) <= maxoverlaps);
+            % candidates = (1:npairs)(candidates);
 
             for idx = 1:size(outliers)
                 outlier = outliers(idx);
@@ -90,7 +89,7 @@ function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
             % We have some outliers which do not overlap between the threshold
             % with the others, so we must break out of an infinite loop.
             % We use a set since order is not important and we replace them outside the loop.
-            if isempty(setxor(current_outliers, outliers))
+            if intersect(current_outliers, outliers) == union(current_outliers, outliers)
                 rematch_outliers = false;
                 break
             end
@@ -115,7 +114,7 @@ function [ys, final_shifts] = diffusion_profile_realignment(bundles, params)
     end
 
     % use the custom shift patterns
-    ys = apply_shift(bundles, shifts(original_templater));
+    realigned = apply_shift(bundles, shifts(original_templater));
     final_shifts = shifts(original_templater);
 end
 
@@ -166,20 +165,22 @@ function [ffts] = get_ffts(bundles, whiten, remove_baseline)
     finite = isfinite(bundles);
 
     if remove_baseline
-        for i = 1:shape(1)
-            bundle = bundles(i, finite(i));
+        for k = 1:shape(1)
+            bundle = bundles(k, finite(k));
+            bundle
+            stop %% turns out the indexing with finite arrays is weird somehow and only gets a single value instead
             lin_poly = linspace(0., sqrt(max(bundle(:))), length(bundle));
             lin_fit = polyfit(lin_poly, bundle, 1);
             drift = polyval(lin_fit, lin_poly);
-            bundles(i, finite(i)) = bundles(i, finite(i)) - drift;
+            bundles(k, finite(k)) = bundles(k, finite(k)) - drift;
         end
     end
 
     if whiten
-        for i = 1:shape(1)
-            mean_val = mean(bundles(i, finite(i)));
-            std_val = std(bundles(i, finite(i)));
-            bundles(i, finite(i)) = (bundles(i, finite(i)) - mean_val) / std_val;
+        for k = 1:shape(1)
+            mean_val = mean(bundles(k, finite(k)));
+            std_val = std(bundles(k, finite(k)));
+            bundles(k, finite(k)) = (bundles(k, finite(k)) - mean_val) / std_val;
         end
     end
 
@@ -187,9 +188,9 @@ function [ffts] = get_ffts(bundles, whiten, remove_baseline)
     pad = 2.^ceil(log2(N));
     ffts = zeros(shape(1), pad/2 + 1, 'complex128');
 
-    for i = 1:shape(1)
-        bundle = bundles(i, finite(i));
-        ffts(i, :) = rfft(bundle, pad);
+    for k = 1:shape(1)
+        bundle = bundles(k, finite(k));
+        ffts(k, :) = rfft(bundle, pad);
     end
 end
 
