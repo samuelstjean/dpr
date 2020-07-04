@@ -50,10 +50,10 @@ And this is the results
 ### Using docker (instead of installing everything)
 
 Well, you will still need to install docker first, see https://runnable.com/docker/getting-started/.
-After that, from the folder containing the ```Dockerfile```, build the container before running it
+After that, you can now pull a version from [Dockerhub](https://hub.docker.com/repository/docker/samuelstjean/dpr).
 
 ~~~bash
-docker build -t dpr:v0.1.2 .
+docker pull samuelstjean/dpr:v0.1.2 
 ~~~
 
 The two diffusion profile realignment scripts can now be run using
