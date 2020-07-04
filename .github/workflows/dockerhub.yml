@@ -21,6 +21,5 @@ jobs:
         name: samuelstjean/dpr
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: "latest,${{ env.RELEASE_VERSION }}"
         tag_names: true
       
