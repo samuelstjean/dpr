@@ -59,8 +59,8 @@ docker pull samuelstjean/dpr:v0.1.2
 The two diffusion profile realignment scripts can now be run using
 
 ~~~bash
-docker run dpr:v0.1.2 # the default command is to run dpr --help
-docker run dpr:v0.1.2 dpr_make_fancy_graph --help
+docker run samuelstjean/dpr:v0.1.2 # the default command is to run dpr --help
+docker run samuelstjean/dpr:v0.1.2 dpr_make_fancy_graph --help
 ~~~
 
 That's it for the basic version, don't hesitate to adapt everything to your needs.
@@ -68,8 +68,8 @@ That's it for the basic version, don't hesitate to adapt everything to your need
 As a more advanced example, to mount your own data folder inside the container (here we re-use the previous example), use
 
 ~~~bash
-docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuel/dpr:v0.1.2 dpr /mnt/af_left_AFD.txt /mnt/af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75
-docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuel/dpr:v0.1.2 dpr_make_fancy_graph /mnt/af_left_pval_unaligned.txt /mnt/af_left_coordinates.txt /mnt/af_left_truncated_coordinates.txt /mnt/af_left_average_coordinates.txt 0,2 /mnt/pvals_unaligned.png --title 'p-values before realignment' -f
+docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuelstjean/dpr:v0.1.2 dpr /mnt/af_left_AFD.txt /mnt/af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75
+docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuelstjean/dpr:v0.1.2 dpr_make_fancy_graph /mnt/af_left_pval_unaligned.txt /mnt/af_left_coordinates.txt /mnt/af_left_truncated_coordinates.txt /mnt/af_left_average_coordinates.txt 0,2 /mnt/pvals_unaligned.png --title 'p-values before realignment' -f
 ~~~
 
 The result will be located in the folder you specified, here we used ```/home/samuel/git/dpr/datasets```.
