@@ -13,7 +13,7 @@ disp('Now loading datasets')
 tic;
 
 % Everything down here should not need to be modified
-files = dir(fullfile(folder,'*.mat'));
+files = dir(fullfile(folder,'*_ur_sp_ri.mat'));
 nfiles = length(files);
 lengths = zeros(nfiles, 1);
 
