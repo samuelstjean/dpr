@@ -90,8 +90,9 @@ def draw_fancy_graph(pval, coords1, coords2, truncated_coords1, truncated_coords
         ax.plot(x, y, color=mean_fiber_cmap, zorder=5)
 
         # We resample the pvals because the coords may be at the tracking stepsize and the final results at the voxel resolution
-        size = len(x)
-        pval_resampled = np.interp(np.arange(size), np.arange(len(pval)), pval)
+        old = np.arange(len(pval)) / len(pval)
+        new = np.arange(len(x)) / len(x)
+        pval_resampled = np.interp(new, old, pval)
 
         # This makes everything above the threshold invisible on the final graph
         pval_resampled[pval_resampled > pval_threshold] = np.nan

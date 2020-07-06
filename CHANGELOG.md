@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.1.3]
+
+- Fix bug due to interpolation in ```dpr.utils.draw_fancy_graph```
+- Add Matlab version and example under the folder ```matlab```
+
 ## [v0.1.2] - 2019-06-18
 - New command line script ```dpr_make_fancy_graph``` to draw p-values over bundles as in the paper
     - Example updated to showcase this, with how to fine tune to your specific needs
