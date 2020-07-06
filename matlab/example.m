@@ -2,8 +2,8 @@
 % We assume the files have been previously resampled in EDTI so that each subject is represented by one streamline
 % per bundle and that the distance between each point (roughly the stepsize, after metric extraction) is the same.
 
-% All datasets are in the same folder for simplicity, but this can likely
-% be adapted by changing the paths
+% All datasets are in the same folder for simplicity, but this can
+% be adapted by changing the paths for your own data
 
 folder = 'datasets';
 metric = 'TractFA';
@@ -28,7 +28,7 @@ bundles = zeros(nfiles, max_length);
 
 % Read all the files for the metric we want to realign.
 % metrics have all different length for every subject
-% so we read them one by one and put them in a huge array we measured before
+% so we read them one by one and put them in a huge array we preallocated before
 for k = 1:nfiles
     filename = fullfile(folder, files(k).name);
     values = load(filename, metric);
@@ -36,16 +36,16 @@ for k = 1:nfiles
     bundles(k, 1:length(values)) = values;
 end
 
-toc; 
+toc;
 
 % We can now call the main realignment function with our pre zero-padded data
 disp('Now performing diffusion profile realignment')
 tic;
 [realigned, final_shifts] = diffusion_profile_realignment(bundles, 'default');
-writematrix(final_shifts,'final_shifts.csv');
-writematrix(bundles,'bundles.csv');
-writematrix(realigned,'realigned.csv')
 toc;
+
+disp('Now drawing the results')
+tic;
 
 % Note that the realigned values have an insane padding, so we truncate it for display purpose
 % Here I chose to keep the length where at least 95% of the subjects are present
@@ -60,38 +60,13 @@ resampled = resample_bundles_to_same(truncated, 50);
 % We can also compute statistics and then overlay them to draw fancy bundles
 % This is really just an example and the test values themselves make no sense in this example context
 % We just need some pvals to draw for the example.
-% Do note that matlab correctly handles nans, but for octave this is in the nan package
-[h,pvals] = ttest2(truncated(1:50, :), truncated(51:100, :));
+% Do note that matlab ttest2 correctly handles nans, but for octave this is in the nan package
+[h, pvals] = ttest2(truncated(1:50, :), truncated(51:100, :));
 
-% Since we also know the shift for each subject, we can also apply it elsewhere
-% For example on the xyz coordinates so we can draw stuff now
-% We use nans to initialize since we will also truncate them later
 
-x = nan(nfiles, max_length);
-y = nan(nfiles, max_length);
-z = nan(nfiles, max_length);
+coords = load('datasets/100307_DWI_b3000_af_left_AFD.mat', 'Tracts').Tracts;
+coords_truncated = load('datasets/100307_DWI_b3000_af_left_AFD_ur.mat', 'Tracts').Tracts;
+coords_representative = load('datasets/100307_DWI_b3000_af_left_AFD_ur_sp.mat', 'Tracts').Tracts;
+draw_fancy_graph(pvals, coords,  coords_truncated,  coords_representative, [1, 3], 'default')
 
-% Read all the files for the xyz coordinates
-for k = 1:nfiles
-    filename = fullfile(folder, files(k).name);
-    values = load(filename, 'Tracts');
-    xyz = values.Tracts{:};
-    len = size(xyz, 1);
-
-    x(k, 1:len) = xyz(:, 1);
-    y(k, 1:len) = xyz(:, 2);
-    z(k, 1:len) = xyz(:, 3);
-end
-
-% Apply truncation on the coordinates
-x_truncated = truncate_bundles(x, 95);
-y_truncated = truncate_bundles(y, 95);
-z_truncated = truncate_bundles(z, 95);
-
-% Get the average pathway for drawing
-x_average = mean(x_truncated, 1);
-y_average = mean(y_truncated, 1);
-z_average = mean(z_truncated, 1);
-
-% Draw everything. This doesn't look super good in octave since it lacks transparency rendering though.
-draw_fancy_graph(pvals, x, z, x_truncated, z_truncated, x_average, z_average, 'default')
+toc;
