@@ -280,7 +280,7 @@ def get_shift_from_fft(x, y, normalize=False):
 
 def get_ffts(bundles, whiten=True, remove_baseline=True):
 
-    bundles = np.array(bundles, copy=True)
+    bundles = np.copy(bundles)
     finite = np.isfinite(bundles)
 
     if remove_baseline:
