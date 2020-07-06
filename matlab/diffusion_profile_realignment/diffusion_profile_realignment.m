@@ -68,10 +68,6 @@ function [realigned, final_shifts] = diffusion_profile_realignment(bundles, para
             % this is the indices of the outliers for the best alignment template bundle we just found
             abs_shifts = abs(shifts(original_templater, :));
             outliers = find(abs_shifts(:) > maxoverlaps);
-            % outliers = (1:npairs)(outliers);
-
-%             candidates = find(abs_shifts(:) <= maxoverlaps);
-            % candidates = (1:npairs)(candidates);
 
             for idx = 1:length(outliers)
                 outlier = outliers(idx);
@@ -90,7 +86,7 @@ function [realigned, final_shifts] = diffusion_profile_realignment(bundles, para
                     shifts(original_templater, outlier) = shifts(original_templater, new_shifter) + shifts(new_shifter, outlier);
                 end
             end
-            
+
             % We have some outliers which do not overlap between the threshold
             % with the others, so we must break out of an infinite loop.
             % We use a set since order is not important and we replace them outside the loop.
@@ -102,11 +98,11 @@ function [realigned, final_shifts] = diffusion_profile_realignment(bundles, para
             current_outliers = outliers;
             condition = ~isempty(outliers);
         end
-    end 
-    
+    end
+
     % This check (instead of if/else) allows us to enter this condition if the previous matching
     % was looping around if an outlier could not be realigned at all
-    if (~rematch_outliers) 
+    if (~rematch_outliers)
         % no rematch outliers? put them to zero/nan then
         outliers = abs(shifts(original_templater)) > maxoverlaps;
         all_bundles = (1:npairs);
@@ -126,27 +122,6 @@ function [realigned, final_shifts] = diffusion_profile_realignment(bundles, para
     realigned = apply_shift(bundles, shifts(original_templater, :));
     final_shifts = shifts(original_templater, :);
 end
-
-
-% function [output] = filter_pairs(bundles)
-%     how_much = size(bundles, 1);
-%     output = cartesian(1:how_much, 1:how_much);
-% end
-
-
-% %% Stolen from https://stackoverflow.com/questions/9834254/cartesian-product-in-matlab
-% function C = cartesian(varargin)
-%     args = varargin;
-%     n = nargin;
-
-%     [F{1:n}] = ndgrid(args{:});
-
-%     for i=n:-1:1
-%         G(:,i) = F{i}(:);
-%     end
-
-%     C = unique(G , 'rows');
-% end
 
 
 function [shift] = get_shift_from_fft(x, y)
@@ -194,10 +169,10 @@ function [ffts] = get_ffts(bundles, whiten, remove_baseline)
 
     N = 2 * shape(2) - 1;
     pad = 2.^ceil(log2(N));
-    
+
     % Initialize a complex valued array
     ffts = complex(zeros(shape(1), pad/2 + 1), 0);
-    
+
     for k = 1:shape(1)
         idx = finite(k, :);
         bundle = bundles(k, idx);
@@ -246,17 +221,15 @@ end
 
 function [peak] = extrapolate(x, y)
     p = polyfit(x, y, 2);
-    
+
     a = p(1);
     b = p(2);
     c = p(3);
 
     if (a == 0) && (b == 0) && (c == 0)
         peak = nan;
-        % value = nan;
     else
         peak = -b / (2 * a);
-        % value = a * peak.^2 + b * peak + c;
     end
 end
 
