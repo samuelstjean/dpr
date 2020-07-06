@@ -74,7 +74,7 @@ def draw_fancy_graph(pval, coords1, coords2, truncated_coords1, truncated_coords
     # This is to draw on a white background
     with plt.style.context('seaborn-whitegrid'):
 
-        fig, ax = plt.subplots(1, 1, sharex='col', sharey='row', figsize=(8,8))
+        fig, ax = plt.subplots(1, 1, sharex='col', sharey='row', figsize=(8, 8))
 
         # Draw the full length shadow bundle
         for x, z in zip(coords1, coords2):
