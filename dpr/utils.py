@@ -77,14 +77,14 @@ def draw_fancy_graph(pval, coords1, coords2, truncated_coords1, truncated_coords
         fig, ax = plt.subplots(1, 1, sharex='col', sharey='row', figsize=(8, 8))
 
         # Draw the full length shadow bundle
-        for x, z in zip(coords1, coords2):
-            ax.plot(x, z, color=shadow_cmap, alpha=0.1, zorder=1)
+        for x, y in zip(coords1, coords2):
+            ax.plot(x, y, color=shadow_cmap, alpha=0.1, zorder=1)
 
         # Draw the original coord, but truncated between rois
-        for x, z in zip(truncated_coords1, truncated_coords2):
-            ax.plot(x, z, color=bundle_cmap, alpha=0.3, zorder=2)
+        for x, y in zip(truncated_coords1, truncated_coords2):
+            ax.plot(x, y, color=bundle_cmap, alpha=0.3, zorder=2)
 
-        # Draw the mean coord, yes we now use x and y because reasons
+        # Draw the mean coord
         x = average1
         y = average2
         ax.plot(x, y, color=mean_fiber_cmap, zorder=5)
