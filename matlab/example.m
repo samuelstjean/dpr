@@ -64,9 +64,18 @@ resampled = resample_bundles_to_same(truncated, 50);
 [h, pvals] = ttest2(truncated(1:50, :), truncated(51:100, :));
 
 
+% Load the coordinates for the background gray bundle
 coords = load('datasets/100307_DWI_b3000_af_left_AFD.mat', 'Tracts').Tracts;
+
+% Load the coordinates for the truncated between ROIs blue bundle
 coords_truncated = load('datasets/100307_DWI_b3000_af_left_AFD_ur.mat', 'Tracts').Tracts;
+
+% Load the coordinates for the representative subject (roughly the middle) in green
 coords_representative = load('datasets/100307_DWI_b3000_af_left_AFD_ur_sp.mat', 'Tracts').Tracts;
-draw_fancy_graph(pvals, coords,  coords_truncated,  coords_representative, [1, 3], 'default')
+
+% Finally draw everything with that information.
+% See the function for the default parameters and how to change them to achieve different effects such as labeling of the axes.
+ax = [1, 3]; % Draw using the X and Z coordinates, so we effectively remove the Ys in the 2D projection
+draw_fancy_graph(pvals, coords,  coords_truncated,  coords_representative, ax, 'default')
 
 toc;
