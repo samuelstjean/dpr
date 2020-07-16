@@ -3,10 +3,16 @@
 An example and assorted implementation from the manuscript **Reducing variability in along-tract analysis with diffusion profile realignment**.
 Have a look at the [example](example.ipynb) on how to use the package and run it on a small example dataset.
 
-To install the package, just run 
+To install the package, just run
 ~~~
 pip install dpr
 ~~~
+
+
+### The matlab version
+
+There is also a shiny new version written in matlab, with an assorted example, available in the [matlab](matlab) folder.
+Feel free to check out and edit the functions as needed for your own usage.
 
 ### A quick example from the command line
 
@@ -53,14 +59,14 @@ Well, you will still need to install docker first, see https://runnable.com/dock
 After that, you can now pull a version from [Dockerhub](https://hub.docker.com/repository/docker/samuelstjean/dpr).
 
 ~~~bash
-docker pull samuelstjean/dpr:v0.1.2 
+docker pull samuelstjean/dpr:v0.2
 ~~~
 
 The two diffusion profile realignment scripts can now be run using
 
 ~~~bash
-docker run samuelstjean/dpr:v0.1.2 # the default command is to run dpr --help
-docker run samuelstjean/dpr:v0.1.2 dpr_make_fancy_graph --help
+docker run samuelstjean/dpr:v0.2 # the default command is to run dpr --help
+docker run samuelstjean/dpr:v0.2 dpr_make_fancy_graph --help
 ~~~
 
 That's it for the basic version, don't hesitate to adapt everything to your needs.
@@ -68,8 +74,8 @@ That's it for the basic version, don't hesitate to adapt everything to your need
 As a more advanced example, to mount your own data folder inside the container (here we re-use the previous example), use
 
 ~~~bash
-docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuelstjean/dpr:v0.1.2 dpr /mnt/af_left_AFD.txt /mnt/af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75
-docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuelstjean/dpr:v0.1.2 dpr_make_fancy_graph /mnt/af_left_pval_unaligned.txt /mnt/af_left_coordinates.txt /mnt/af_left_truncated_coordinates.txt /mnt/af_left_average_coordinates.txt 0,2 /mnt/pvals_unaligned.png --title 'p-values before realignment' -f
+docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuelstjean/dpr:v0.2 dpr /mnt/af_left_AFD.txt /mnt/af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75
+docker run -it -v /home/samuel/git/dpr/datasets:/mnt samuelstjean/dpr:v0.2 dpr_make_fancy_graph /mnt/af_left_pval_unaligned.txt /mnt/af_left_coordinates.txt /mnt/af_left_truncated_coordinates.txt /mnt/af_left_average_coordinates.txt 0,2 /mnt/pvals_unaligned.png --title 'p-values before realignment' -f
 ~~~
 
 The result will be located in the folder you specified, here we used ```/home/samuel/git/dpr/datasets```.
@@ -86,6 +92,6 @@ NeuroImage, 2019. ISSN 1053-811
 
 The data is also available at https://zenodo.org/record/2483169.
 
-The manuscript is also available at https://www.sciencedirect.com/science/article/pii/S1053811919305014.
+The open access manuscript is also available at https://www.sciencedirect.com/science/article/pii/S1053811919305014.
 
 To refer to a specific version of the code, everything is also archived over at https://zenodo.org/record/3248894.
