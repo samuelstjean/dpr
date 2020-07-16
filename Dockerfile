@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 ENV DEPENDS='numpy==1.16.4 scipy==1.2.2 matplotlib==2.2.4' \
-    dpr_version='0.1.2' \
+    dpr_version='0.2' \
     MPLBACKEND="agg"
 
 RUN apt update && \

@@ -5,7 +5,7 @@ with open('README.md', encoding='utf-8') as f:
 
 setup(
     name='dpr',
-    version='0.1.2',
+    version='0.2',
     author='Samuel St-Jean',
     author_email='samuel@isi.uu.nl',
     packages=find_packages(),

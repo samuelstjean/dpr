@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.1.3]
+## [v0.2] - 2020-07-16
 
 - Fix bug due to interpolation in ```dpr.utils.draw_fancy_graph```
 - Add Matlab version and example under the folder ```matlab```
