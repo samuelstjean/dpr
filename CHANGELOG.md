@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.2.1]
+
+- Documentation now available at https://dpr.readthedocs.io
+
+
 ## [v0.2] - 2020-07-16
 
 - Fix bug due to interpolation in ```dpr.utils.draw_fancy_graph```

@@ -8,6 +8,7 @@ To install the package, just run
 pip install dpr
 ~~~
 
+The documentation is available at https://dpr.readthedocs.io.
 
 ### The matlab version
 
