@@ -13,6 +13,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../dpr/'))
 
 
 # -- Project information -----------------------------------------------------
@@ -24,6 +25,9 @@ author = 'Samuel St-Jean'
 # The full version, including alpha/beta/rc tags
 release = 'v0.2'
 
+# If your documentation needs a minimal Sphinx version, state it here.
+#
+needs_sphinx = '3.0'
 
 # -- General configuration ---------------------------------------------------
 
@@ -32,14 +36,13 @@ release = 'v0.2'
 # ones.
 extensions = ['autoapi.extension',
               'sphinx.ext.mathjax',
-              # 'sphinx.ext.autosummary',
               'sphinx.ext.viewcode',
               'sphinx.ext.napoleon',
               'recommonmark']
 
 autoapi_type = 'python'
 autoapi_dirs = ['../dpr']
-autoapi_ignore = ['test_*']
+autoapi_ignore = ["dpr/tests/test_*.py"]
 
 
 # Add any paths that contain templates here, relative to this directory.
@@ -61,4 +64,8 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
+
+
+# The master toctree document.
+master_doc = 'index'
