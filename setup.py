@@ -7,7 +7,6 @@ setup(
     name='dpr',
     version='0.2',
     author='Samuel St-Jean',
-    author_email='samuel@isi.uu.nl',
     packages=find_packages(),
     scripts=['scripts/dpr', 'scripts/dpr_make_fancy_graph'],
     url='https://github.com/samuelstjean/dpr',
