@@ -96,7 +96,13 @@ def main():
     if args.exploredti:
         data, header = strip_header(args.data)
     else:
-        data = np.genfromtxt(args.data)
+        _, ext = os.path.splitext(args.data)
+        if ext == '.csv'
+            delimiter = ','
+        else:
+            delimiter = None
+            
+        data = np.genfromtxt(args.data, delimiter=delimiter)
 
     logger.info('Number of bundles is {}, original number of points per tract is {}'.format(*data.shape))
 
