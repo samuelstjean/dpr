@@ -1,5 +1,3 @@
-from __future__ import division, print_function
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -43,11 +41,11 @@ def strip_first_col(fname, delimiter=None):
                 continue
 
 
-def strip_header(filename, columns=0):
-    header = np.genfromtxt(filename, dtype=str, usecols=columns)
+def strip_header(filename, columns=0, delimiter=None):
+    header = np.genfromtxt(filename, dtype=str, usecols=columns, delimiter=delimiter)
     with open(filename, 'r') as file:
-        ncols = len(file.readline().split())
-    bundles = np.genfromtxt(filename, usecols=range(1, ncols))
+        ncols = len(file.readline().split(delimiter))
+    bundles = np.genfromtxt(filename, usecols=range(1, ncols), delimiter=delimiter)
     return bundles, header
 
 
