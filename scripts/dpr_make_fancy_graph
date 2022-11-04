@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-from __future__ import division, print_function
-
 import numpy as np
 
 import argparse
@@ -98,9 +96,9 @@ def main():
 
     if os.path.isfile(args.output):
         if args.overwrite:
-            logger.warning('Overwriting {}'.format(os.path.realpath(args.output)))
+            logger.warning(f'Overwriting {os.path.realpath(args.output)}')
         else:
-            parser.error('{} already exists! Use -f or --force to overwrite it.'.format(args.output))
+            parser.error(f'{args.output} already exists! Use -f or --force to overwrite it.')
 
     axis1, axis2 = args.columns
 
