@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-from __future__ import division, print_function
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -42,7 +40,7 @@ def buildArgsParser():
                    help='Path of the output text file of realigned bundles.')
 
     p.add_argument('--exploredti', action='store_true',
-                   help='Strip the first column from the input file.')
+                   help='Strip the first column from the input file as used by explore dti to store each subject name.')
 
     p.add_argument('--do_graph', action='store_true',
                    help='Save a small plot of the original and realigned data.')
@@ -88,17 +86,24 @@ def main():
 
     if os.path.isfile(args.output):
         if args.overwrite:
-            logger.warning('Overwriting {}'.format(os.path.realpath(args.output)))
+            logger.warning(f'Overwriting {os.path.realpath(args.output)}')
         else:
-            parser.error('{} already exists! Use -f or --force to overwrite it.'.format(args.output))
+            parser.error(f'{args.output} already exists! Use -f or --force to overwrite it.')
 
     # load the data
-    if args.exploredti:
-        data, header = strip_header(args.data)
-    else:
-        data = np.genfromtxt(args.data)
+    _, ext = os.path.splitext(args.data)
 
-    logger.info('Number of bundles is {}, original number of points per tract is {}'.format(*data.shape))
+    if ext == '.csv':
+        delimiter = ','
+    else:
+        delimiter = None
+
+    if args.exploredti:
+        data, header = strip_header(args.data, delimiter=delimiter)
+    else:
+        data = np.genfromtxt(args.data, delimiter=delimiter)
+
+    logger.info(f'Number of bundles is {data.shape[0]}, original number of points per tract is {data.shape[1]}')
 
     if args.coordinates is not None:
         coordinates = np.genfromtxt(args.coordinates)
@@ -115,7 +120,7 @@ def main():
 
     resampled = resample_bundles_to_same(truncated, num_points=num_points)
 
-    logger.info('Final number of points per tract is {}'.format(num_points))
+    logger.info(f'Final number of points per tract is {num_points}')
 
     if args.do_graph:
         f, axes = plt.subplots(2, 1, sharex=False, sharey=True)
@@ -139,8 +144,15 @@ def main():
     if args.exploredti:
         resampled = np.column_stack((header, resampled))
 
+    _, ext = os.path.splitext(args.output)
+
+    if ext == '.csv':
+        delimiter = ','
+    else:
+        delimiter = ' '
+
     with open(args.output, 'w') as file:
-        np.savetxt(file, resampled, delimiter=' ', fmt='%s')
+        np.savetxt(file, resampled, delimiter=delimiter, fmt='%s')
 
 
 if __name__ == "__main__":
