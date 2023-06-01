@@ -1,9 +1,9 @@
 # Changelog
 
-## [v0.2.1]
+## [v0.2.1] - 2023-06-01
 
+- Support for csv files input and output
 - Documentation now available at https://dpr.readthedocs.io
-
 
 ## [v0.2] - 2020-07-16
 
