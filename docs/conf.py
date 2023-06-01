@@ -19,11 +19,12 @@ sys.path.insert(0, os.path.abspath('../dpr/'))
 # -- Project information -----------------------------------------------------
 
 project = 'Diffusion Profile Realignment'
-copyright = '2020, Samuel St-Jean'
+copyright = '2023, Samuel St-Jean'
 author = 'Samuel St-Jean'
+language = 'en'
 
 # The full version, including alpha/beta/rc tags
-release = 'v0.2'
+release = 'v0.2.1'
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
@@ -38,11 +39,11 @@ extensions = ['autoapi.extension',
               'sphinx.ext.mathjax',
               'sphinx.ext.viewcode',
               'sphinx.ext.napoleon',
-              'recommonmark']
+              'myst_parser']
 
 autoapi_type = 'python'
 autoapi_dirs = ['../dpr']
-autoapi_ignore = ["dpr/tests/test_*.py"]
+autoapi_ignore = ["*/tests/*.py"]
 
 
 # Add any paths that contain templates here, relative to this directory.

@@ -6,7 +6,9 @@ This is the documentation detailing the internal of 'Reducing variability in alo
 It is most easily understood by looking at the code of each function since it contains comments about design choices and usage.
 
 You can find the original paper and full details of the algorithm as presented in
-::
+
+.. code-block:: bash
+
     Samuel St-Jean, Maxime Chamberland, Max A. Viergever, Alexander Leemans,
     Reducing variability in along-tract analysis with diffusion profile realignment,
     NeuroImage, Volume 199, 2019, Pages 663-679
