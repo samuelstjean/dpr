@@ -11,12 +11,18 @@ dependencies = ['numpy>=1.10',
                 'matplotlib>=2.0']
 description = 'Implementation of "Reducing variability in along-tract analysis with diffusion profile realignment".'
 readme = "README.md"
-license = {text = "MIT License"}
-authors = [
-  {name = "Samuel St-Jean", email = "firstname.st_jean@med.lu.se"}
-]
+license = { text = "MIT License" }
+authors = [{ name = "Samuel St-Jean", email = "firstname.st_jean@med.lu.se" }]
+
+[project.scripts]
+dpr = "dpr.scripts.dpr:main"
+dpr_make_fancy_graph = "dpr.scripts.dpr_make_fancy_graph:main"
 
 [project.urls]
 Homepage = "https://github.com/samuelstjean/dpr"
 Documentation = "https://dpr.readthedocs.io/en/latest/"
 Changelog = "https://github.com/samuelstjean/dpr/blob/master/CHANGELOG.md"
+
+[tool.setuptools]
+packages = ["dpr",
+            "dpr.scripts"]
