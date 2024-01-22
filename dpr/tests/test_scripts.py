@@ -5,23 +5,12 @@ from pathlib import Path
 
 cwd = Path(__file__).parents[2] / Path("datasets")
 commands_dpr = [
-    "dpr data_SENSE3_MB3_noisemap.nii.gz sigma_maxlk_nmaps.nii.gz N_maxlk_nmaps.nii.gz mask_maxlk_nmaps.nii.gz -m maxlk --noise_maps",
-    "dpr data_SENSE3_MB3_noisemap.nii.gz sigma_nmaps.nii.gz N_nmaps.nii.gz mask_nmaps.nii.gz --noise_maps",
-    "dpr data_SENSE3_MB3_noisemap.nii.gz sigma_nmaps.nii.gz N_nmaps.nii.gz mask_nmaps.nii.gz --noise_maps -f --subsample",
-    "dpr data_SENSE3_MB3_noisemap.nii.gz sigma_nmaps.nii.gz N_nmaps.nii.gz mask_nmaps.nii.gz --noise_maps -f --fast_median -m maxlk",
-    "dpr dwi_1_8.nii.gz sigma.nii.gz N.nii.gz mask.nii.gz -v",
-    "dpr dwi_1_8.nii.gz sigma.nii.gz N.nii.gz mask.nii.gz -m maxlk -f --ncores 4",
-    "dpr dwi_1_8.nii.gz sigma_maxlk.nii.gz N_maxlk.nii.gz mask_maxlk.nii.gz -m maxlk --size 3 -f -v --axis 0",
+    'dpr af_left_AFD.txt af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75'
 ]
 
 commands_dpr_graph = [
-    "dpr data_SENSE3_MB3_noisemap.nii.gz sigma_maxlk_nmaps.nii.gz N_maxlk_nmaps.nii.gz mask_maxlk_nmaps.nii.gz -m maxlk --noise_maps",
-    "dpr data_SENSE3_MB3_noisemap.nii.gz sigma_nmaps.nii.gz N_nmaps.nii.gz mask_nmaps.nii.gz --noise_maps",
-    "dpr data_SENSE3_MB3_noisemap.nii.gz sigma_nmaps.nii.gz N_nmaps.nii.gz mask_nmaps.nii.gz --noise_maps -f --subsample",
-    "dpr data_SENSE3_MB3_noisemap.nii.gz sigma_nmaps.nii.gz N_nmaps.nii.gz mask_nmaps.nii.gz --noise_maps -f --fast_median -m maxlk",
-    "dpr dwi_1_8.nii.gz sigma.nii.gz N.nii.gz mask.nii.gz -v",
-    "dpr dwi_1_8.nii.gz sigma.nii.gz N.nii.gz mask.nii.gz -m maxlk -f --ncores 4",
-    "dpr dwi_1_8.nii.gz sigma_maxlk.nii.gz N_maxlk.nii.gz mask_maxlk.nii.gz -m maxlk --size 3 -f -v --axis 0",
+    "dpr_make_fancy_graph af_left_pval_unaligned.txt af_left_coordinates.txt af_left_truncated_coordinates.txt af_left_average_coordinates.txt 0,2 pvals_unaligned.png --title 'p-values before realignment' -f",
+    "dpr_make_fancy_graph af_left_pval_realigned.txt af_left_coordinates.txt af_left_truncated_coordinates.txt af_left_average_coordinates.txt 0,2 pvals_realigned.png -f -v --labelx 'label X' --labely 'Label Y' --dpi 100"
 ]
 
 
