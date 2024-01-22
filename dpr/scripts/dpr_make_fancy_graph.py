@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import numpy as np
 
 import argparse
@@ -123,7 +121,3 @@ def main():
                                  coord1_label=args.labelx, coord2_label=args.labely, title=args.title)
 
     fig.savefig(args.output, dpi=args.dpi, bbox_inches='tight')
-
-
-if __name__ == "__main__":
-    main()
