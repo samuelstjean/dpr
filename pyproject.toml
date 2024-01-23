@@ -4,9 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dpr"
-version = '0.2.1'
+version = '0.2.2'
 requires-python = ">=3.7"
-dependencies = ['numpy>=1.15', 'scipy>=1.2', 'matplotlib>=3.0']
+dependencies = ['numpy>=1.15', 
+                'scipy>=1.2', 
+                'matplotlib>=3.0']
 description = 'Implementation of "Reducing variability in along-tract analysis with diffusion profile realignment".'
 readme = "README.md"
 license = { text = "MIT License" }
@@ -22,4 +24,5 @@ Documentation = "https://dpr.readthedocs.io/en/latest/"
 Changelog = "https://github.com/samuelstjean/dpr/blob/master/CHANGELOG.md"
 
 [tool.setuptools]
-packages = ["dpr", "dpr.scripts"]
+packages = ["dpr", 
+            "dpr.scripts"]
