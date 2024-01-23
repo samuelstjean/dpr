@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.2.2]
+
+- Moved the scripts to a proper entrypoint instead of an added file
+    - This changes nothing in the way each script is called but just makes it more robust on Windows
+
 ## [v0.2.1] - 2023-06-01
 
 - Support for csv files input and output

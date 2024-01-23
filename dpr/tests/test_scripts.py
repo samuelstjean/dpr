@@ -5,7 +5,8 @@ from pathlib import Path
 
 cwd = Path(__file__).parents[2] / Path("datasets")
 commands_dpr = [
-    'dpr af_left_AFD.txt af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75'
+    'dpr af_left_AFD.txt af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75',
+    'dpr af_left_AFD.txt af_left_AFD_realigned.csv --exploredti -f'
 ]
 
 commands_dpr_graph = [
