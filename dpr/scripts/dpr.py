@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -153,7 +151,3 @@ def main():
 
     with open(args.output, 'w') as file:
         np.savetxt(file, resampled, delimiter=delimiter, fmt='%s')
-
-
-if __name__ == "__main__":
-    main()

@@ -106,7 +106,7 @@ def align_bundles(bundles, percent=15, padding=0., order=1, eps=1e-5, mode='full
             shifts[outliers] = 0.
             shifts[:, outliers] = 0.
 
-        warn('Possible outliers found {}'.format(outliers))
+        warn(f'Possible outliers found {outliers}')
 
     # use the custom shift patterns
     ys = apply_shift(bundles, shifts[original_templater])
@@ -123,7 +123,7 @@ def resample_bundles_to_same(bundles, num_points=None):
         bundles = bundles[None, :]
 
     if bundles.ndim != 2:
-        error = 'bundles needs to be a 2D array, but is {}D'.format(bundles.ndim)
+        error = f'bundles needs to be a 2D array, but is {bundles.ndim}D'
         raise ValueError(error)
 
     if num_points is None:
@@ -176,7 +176,7 @@ def flip_fibers(bundles, coordinates, padding=np.nan, template=None):
     '''
 
     if coordinates[0].shape[1] != 3:
-        raise ValueError('coordinates should be Nx3 but is {}'.format(coordinates[0].shape))
+        raise ValueError(f'coordinates should be Nx3 but is {coordinates[0].shape}')
 
     new_bundles = np.zeros_like(bundles)
 
@@ -201,7 +201,7 @@ def flip_fibers(bundles, coordinates, padding=np.nan, template=None):
 def truncate(bundles, mode='shortest', trimval=np.nan, axis=0):
 
     if bundles.ndim > 2:
-        error = 'Number of dimension must be lower than 2, but was {}'.format(bundles.ndim)
+        error = f'Number of dimension must be lower than 2, but was {bundles.ndim}'
         raise ValueError(error)
 
     if mode == 'shortest':
@@ -211,11 +211,11 @@ def truncate(bundles, mode='shortest', trimval=np.nan, axis=0):
     elif isinstance(mode, int):
 
         if mode > 100 or mode < 1:
-            raise ValueError('mode must be between 1 and 100 {}'.format(mode))
+            raise ValueError(f'mode must be between 1 and 100 {mode}')
 
         threshold = np.floor(mode * bundles.shape[0] / 100)
     else:
-        raise ValueError('Unrecognized truncation mode {}'.format(mode))
+        raise ValueError(f'Unrecognized truncation mode {mode}')
 
     if np.isnan(trimval):
         indexes = np.isfinite(bundles).sum(axis=axis) >= threshold
@@ -246,7 +246,7 @@ def filter_pairs(allpairs, mode):
     elif mode == 'everything':
         func = lambda *_: True  # this always return True
     else:
-        error = 'String mismatch, mode was {} of type {}'.format(mode, type(mode))
+        error = f'String mismatch, mode was {mode} of type {type(mode)}'
         raise ValueError(error)
 
     output = []
