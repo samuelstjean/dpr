@@ -69,41 +69,38 @@ def draw_fancy_graph(pval, coords1, coords2, truncated_coords1, truncated_coords
     if title is None:
         title = 'p-values after realignment'
 
-    # This is to draw on a white background
-    with plt.style.context('seaborn-whitegrid'):
+    fig, ax = plt.subplots(1, 1, sharex='col', sharey='row', figsize=(8, 8))
 
-        fig, ax = plt.subplots(1, 1, sharex='col', sharey='row', figsize=(8, 8))
+    # Draw the full length shadow bundle
+    for x, y in zip(coords1, coords2):
+        ax.plot(x, y, color=shadow_cmap, alpha=0.1, zorder=1)
 
-        # Draw the full length shadow bundle
-        for x, y in zip(coords1, coords2):
-            ax.plot(x, y, color=shadow_cmap, alpha=0.1, zorder=1)
+    # Draw the original coord, but truncated between rois
+    for x, y in zip(truncated_coords1, truncated_coords2):
+        ax.plot(x, y, color=bundle_cmap, alpha=0.3, zorder=2)
 
-        # Draw the original coord, but truncated between rois
-        for x, y in zip(truncated_coords1, truncated_coords2):
-            ax.plot(x, y, color=bundle_cmap, alpha=0.3, zorder=2)
+    # Draw the mean coord
+    x = average1
+    y = average2
+    ax.plot(x, y, color=mean_fiber_cmap, zorder=5)
 
-        # Draw the mean coord
-        x = average1
-        y = average2
-        ax.plot(x, y, color=mean_fiber_cmap, zorder=5)
+    # We resample the pvals because the coords may be at the tracking stepsize and the final results at the voxel resolution
+    old = np.arange(len(pval)) / len(pval)
+    new = np.arange(len(x)) / len(x)
+    pval_resampled = np.interp(new, old, pval)
 
-        # We resample the pvals because the coords may be at the tracking stepsize and the final results at the voxel resolution
-        old = np.arange(len(pval)) / len(pval)
-        new = np.arange(len(x)) / len(x)
-        pval_resampled = np.interp(new, old, pval)
+    # This makes everything above the threshold invisible on the final graph
+    pval_resampled[pval_resampled > pval_threshold] = np.nan
+    cmap_axis = ax.scatter(x, y, c=pval_resampled, cmap=pval_cmap, zorder=10, marker='.', vmin=0, vmax=pval_threshold)
 
-        # This makes everything above the threshold invisible on the final graph
-        pval_resampled[pval_resampled > pval_threshold] = np.nan
-        cmap_axis = ax.scatter(x, y, c=pval_resampled, cmap=pval_cmap, zorder=10, marker='.', vmin=0, vmax=pval_threshold)
+    if draw_colorbar:
+        colorbar(cmap_axis)
 
-        if draw_colorbar:
-            colorbar(cmap_axis)
+    ax.axis('equal')
+    ax.set_xlabel(f"{coord1_label} coordinates (mm)", fontsize=12)
+    ax.set_ylabel(f"{coord2_label} coordinates (mm)", fontsize=12)
 
-        ax.axis('equal')
-        ax.set_xlabel("{} coordinates (mm)".format(coord1_label), fontsize=12)
-        ax.set_ylabel("{} coordinates (mm)".format(coord2_label), fontsize=12)
-
-        ax.set_title(title, fontsize=20)
-        fig.tight_layout()
+    ax.set_title(title, fontsize=20)
+    fig.tight_layout()
 
     return fig, ax
