@@ -55,7 +55,7 @@ def align_bundles(bundles, percent=15, padding=0., order=1, eps=1e-5, mode='full
         largest_shifts = np.max(np.abs(shifts), axis=1)[original_templater]
         original_templater = original_templater[largest_shifts.argmin()]
 
-    original_templater = int(original_templater)  # it has a weird shape now if singleton
+    original_templater = int(original_templater.squeeze())  # it has a weird shape now if singleton
 
     if rematch_outliers:
         condition = True
