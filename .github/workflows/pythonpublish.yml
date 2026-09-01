@@ -25,7 +25,7 @@ jobs:
       run: python -m build
 
     - name: Make doc
-      run: pdoc autodmri/ -o docs
+      run: pdoc dpr/ -o docs
 
     - uses: actions/upload-pages-artifact@v5
       with:
