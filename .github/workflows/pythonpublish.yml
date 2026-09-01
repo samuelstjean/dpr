@@ -21,8 +21,10 @@ jobs:
     - name: Install dependencies
       run: python -m pip install --upgrade pip build pdoc
 
-    - name: Build
-      run: python -m build
+    - name: Build and install
+      run: | 
+        python -m build
+        python -m pip install dist/*.whl
 
     - name: Make doc
       run: pdoc dpr/ -o docs
