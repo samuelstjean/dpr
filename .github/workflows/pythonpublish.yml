@@ -19,7 +19,7 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: python -m pip install --upgrade pip build pdoc
+      run: python -m pip install --upgrade pip build pdoc pytest
 
     - name: Build and install
       run: | 
