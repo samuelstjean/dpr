@@ -6,13 +6,15 @@ build-backend = "setuptools.build_meta"
 name = "dpr"
 version = '0.2.2'
 requires-python = ">=3.9"
-dependencies = ['numpy>=1.15', 
-                'scipy>=1.2', 
-                'matplotlib>=3.0']
+dependencies = [
+    'numpy>=1.15',
+    'scipy>=1.2',
+    'matplotlib>=3.0'
+]
 description = 'Implementation of "Reducing variability in along-tract analysis with diffusion profile realignment".'
 readme = "README.md"
 license = "MIT"
-authors = [{ name = "Samuel St-Jean", email = "firstname.st-jean@usherbrooke.ca" }]
+authors = [{ name = "Samuel St-Jean" }]
 
 [project.scripts]
 dpr = "dpr.scripts.dpr:main"
@@ -24,5 +26,7 @@ Documentation = "https://samuelstjean.github.io/dpr"
 Changelog = "https://github.com/samuelstjean/dpr/blob/master/CHANGELOG.md"
 
 [tool.setuptools]
-packages = ["dpr", 
-            "dpr.scripts"]
+packages = [
+    "dpr",
+    "dpr.scripts"
+]
