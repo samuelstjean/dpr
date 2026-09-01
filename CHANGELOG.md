@@ -1,6 +1,11 @@
 # Changelog
 
-## [v0.2.2]
+## [v0.2.3] - 2026-09-01
+
+- Fixed an issue when using numpy version 2.4 and later
+- New documentation hosted at https://samuelstjean.github.io/dpr
+
+## [v0.2.2] - 2024-12-16
 
 - Moved the scripts to a proper entrypoint instead of an added file
     - This changes nothing in the way each script is called but just makes it more robust on Windows

@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dpr"
-version = '0.2.2'
+version = '0.2.3'
 requires-python = ">=3.9"
 dependencies = [
-    'numpy>=1.15',
+    'numpy>=1.19',
     'scipy>=1.2',
-    'matplotlib>=3.0'
+    'matplotlib>=3.3'
 ]
 description = 'Implementation of "Reducing variability in along-tract analysis with diffusion profile realignment".'
 readme = "README.md"
