@@ -4,9 +4,9 @@ An example and assorted implementation from the manuscript **Reducing variabilit
 Have a look at the [example](example.ipynb) on how to use the package and run it on a small example dataset.
 
 To install the package, just run
-~~~
+```
 pip install dpr
-~~~
+```
 
 The documentation is available at https://samuelstjean.github.io/dpr
 
@@ -26,9 +26,9 @@ We finally resample everything to 75 points with **--points 75**.
 
 The **-f** option overwrites the output files and the **-v** option prints useful informative messages throughout (and are optional).
 
-~~~bash
+```bash
 dpr datasets/af_left_AFD.txt datasets/af_left_AFD_realigned.txt --exploredti --do_graph -f -v --points 75
-~~~
+```
 
 The output ```datasets/af_left_AFD_realigned.txt``` is a text file where each line is a subject and each column is a different point of the along tract analysis.
 
@@ -44,10 +44,10 @@ The realigned metric is instead using padding with Nans, remember to consider/ke
 We can also draw the p-values (computed separately) over the bundle using the script ```dpr_make_fancy_graph```.
 This requires the original coordinates, the truncated version between rois and the coordinates to the representative streamline.
 
-~~~bash
+```bash
 dpr_make_fancy_graph datasets/af_left_pval_unaligned.txt datasets/af_left_coordinates.txt datasets/af_left_truncated_coordinates.txt datasets/af_left_average_coordinates.txt 0,2 pvals_unaligned.png --title 'p-values before realignment' -f
 dpr_make_fancy_graph datasets/af_left_pval_realigned.txt datasets/af_left_coordinates.txt datasets/af_left_truncated_coordinates.txt datasets/af_left_average_coordinates.txt 0,2 pvals_realigned.png -f
-~~~
+```
 
 And this is the results
 
@@ -58,11 +58,11 @@ And this is the results
 
 The main reference is
 
-~~~
+```
 Samuel St-Jean, Maxime Chamberland, Max A. Viergever, Alexander Leemans,
 Reducing variability in along-tract analysis with diffusion profile realignment,
 NeuroImage, 2019. ISSN 1053-811
-~~~
+```
 
 The data is also available at https://zenodo.org/record/2483169.
 
